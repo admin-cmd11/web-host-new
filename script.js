@@ -1,3 +1,30 @@
+function getFriendlyFirebaseError(error) {
+    if (!error || !error.code) return 'An unknown error occurred.';
+
+    switch (error.code) {
+        case 'auth/invalid-email':
+            return 'Invalid email address format.';
+        case 'auth/user-disabled':
+            return 'This user account has been disabled.';
+        case 'auth/user-not-found':
+            return 'No user found with this email.';
+        case 'auth/wrong-password':
+            return 'Incorrect password. Please try again.';
+        case 'auth/email-already-in-use':
+            return 'This email is already registered. Please log in instead.';
+        case 'auth/weak-password':
+            return 'Password should be at least 6 characters.';
+        case 'auth/missing-email':
+            return 'Email address is required.';
+        case 'auth/internal-error':
+            return 'An internal error occurred. Please try again later.';
+        case 'auth/too-many-requests':
+            return 'Too many failed attempts. Please try again later.';
+        default:
+            return error.message || 'An unexpected error occurred.';
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.container');
     const signupLink = document.querySelector('#signupLink');
@@ -84,8 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert(data.message); // Inform the user that the OTP has been sent
             })
             .catch(error => {
-                console.error('Error sending OTP request:', error);
-                alert(error.message || 'An error occurred while requesting OTP.');
+                alert(getFriendlyFirebaseError(error));
             });
         } else {
             alert('Please enter your email address.');
@@ -123,8 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                console.error('Error verifying OTP and creating account:', error);
-                alert(error.message || 'An error occurred during account creation.');
+                alert(getFriendlyFirebaseError(error));
             });
         } else {
             alert('Please enter your email, OTP, and password.');
@@ -137,25 +162,37 @@ document.addEventListener('DOMContentLoaded', function() {
     loginBtn.addEventListener('click', function () {
         const email = document.getElementById('loginEmail').value;
         const password = document.getElementById('loginPassword').value;
-    
+
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                alert('Login successful!');
-                console.log('Logged in user:', user.email);
-    
-                // Store the email in local storage
-                localStorage.setItem('userEmail', user.email);
-    
-                user.getIdToken().then(token => {
-                    localStorage.setItem('authToken', token);
-                });
-                window.location.href = 'dashboard.html';
-            })
-            .catch((error) => {
-                alert('Login failed: ' + error.message);
+    .then((userCredential) => {
+        const user = userCredential.user;
+        return user.getIdToken().then((token) => {
+            // Send token to backend
+            return fetch('https://txt2excelbackend.onrender.com/sessionLogin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include', // Important for cookies/session
+                body: JSON.stringify({ idToken: token })
             });
+        });
+    })
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error('Session login failed');
+        }
+        window.location.href = 'dashboard.html';
+    })
+    .catch((error) => {
+        console.error(error);
+        alert("Session login failed. Please try again.");
     });
+
+    
+
+    });
+    
 });
 const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 
@@ -173,7 +210,6 @@ forgotPasswordLink.addEventListener('click', function (e) {
             alert('Password reset email sent! Check your inbox or spam folder.');
         })
         .catch((error) => {
-            console.error("Error sending password reset email:", error);
-            alert(error.message || "An error occurred while sending the reset email.");
+            alert(getFriendlyFirebaseError(error));
         });
 });
