@@ -156,44 +156,44 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    
-    
+    document.getElementById('loginBtn').addEventListener('click', function () {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
 
-    loginBtn.addEventListener('click', function () {
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        firebase.auth().signInWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-        const user = userCredential.user;
-        return user.getIdToken().then((token) => {
-            // Send token to backend
-            return fetch('https://txt2excelbackend.onrender.com/sessionLogin', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include', // Important for cookies/session
-                body: JSON.stringify({ idToken: token })
+    // Firebase sign-in process
+    firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            
+            // Get Firebase ID token after successful login
+            return user.getIdToken().then((token) => {
+                // Send the ID token to the backend for session login
+                return fetch('https://txt2excelbackend.onrender.com/sessionLogin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include', // Important for cookies/session
+                    body: JSON.stringify({ idToken: token })
+                });
             });
+        })
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error('Session login failed');
+            }
+
+            // On successful session login, redirect to the dashboard
+            window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+            console.error(error);
+            alert("Session login failed. Please try again.");
         });
-    })
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error('Session login failed');
-        }
-        window.location.href = 'dashboard.html';
-    })
-    .catch((error) => {
-        console.error(error);
-        alert("Session login failed. Please try again.");
-    });
-
-    
-
-    });
-    
 });
+
+
+    
 const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 
 forgotPasswordLink.addEventListener('click', function (e) {
