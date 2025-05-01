@@ -130,6 +130,8 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please enter your email, OTP, and password.');
         }
     });
+
+    
     
 
     loginBtn.addEventListener('click', function () {
@@ -154,4 +156,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 alert('Login failed: ' + error.message);
             });
     });
+});
+const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+forgotPasswordLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value;
+
+    if (!email) {
+        alert("Please enter your email address in the email field above first.");
+        return;
+    }
+
+    firebase.auth().sendPasswordResetEmail(email)
+        .then(() => {
+            alert('Password reset email sent! Check your inbox or spam folder.');
+        })
+        .catch((error) => {
+            console.error("Error sending password reset email:", error);
+            alert(error.message || "An error occurred while sending the reset email.");
+        });
 });
