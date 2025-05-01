@@ -122,10 +122,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = document.getElementById('signupEmail').value;
         const otp = document.getElementById('signupOtp').value;
         const password = document.getElementById('signupPassword').value;
-    
+
         if (email && otp && password) {
             let statusCode = null;
-    
+
             fetch('https://txt2excelbackend.onrender.com/signup/verify-otp', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -157,59 +157,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('loginBtn').addEventListener('click', function () {
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
+        console.log('Login button clicked!'); // Debugging line
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
 
-    // Firebase sign-in process
-    firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            
-            // Get Firebase ID token after successful login
-            return user.getIdToken().then((token) => {
-                // Send the ID token to the backend for session login
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                return user.getIdToken();
+            })
+            .then((token) => {
                 return fetch('https://txt2excelbackend.onrender.com/sessionLogin', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    credentials: 'include', // Important for cookies/session
+                    credentials: 'include',
                     body: JSON.stringify({ idToken: token })
                 });
+            })
+            .then((response) => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        const errorMessage = data.error || 'Session login failed';
+                        throw new Error(errorMessage);
+                    });
+                }
+                window.location.href = 'dashboard.html';
+            })
+            .catch((error) => {
+                console.error("Login error:", error);
+                alert(error.message); // Display the actual error message
             });
-        })
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error('Session login failed');
-            }
-
-            // On successful session login, redirect to the dashboard
-            window.location.href = 'dashboard.html';
-        })
-        .catch((error) => {
-            console.error(error);
-            alert("Session login failed. Please try again.");
-        });
-});
+    });
 
 
-    
-const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+    const forgotPasswordLink = document.getElementById('forgotPasswordLink');
 
-forgotPasswordLink.addEventListener('click', function (e) {
-    e.preventDefault();
-    const email = document.getElementById('loginEmail').value;
+    forgotPasswordLink.addEventListener('click', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
 
-    if (!email) {
-        alert("Please enter your email address in the email field above first.");
-        return;
-    }
+        if (!email) {
+            alert("Please enter your email address in the email field above first.");
+            return;
+        }
 
-    firebase.auth().sendPasswordResetEmail(email)
-        .then(() => {
-            alert('Password reset email sent! Check your inbox or spam folder.');
-        })
-        .catch((error) => {
-            alert(getFriendlyFirebaseError(error));
-        });
+        firebase.auth().sendPasswordResetEmail(email)
+            .then(() => {
+                alert('Password reset email sent! Check your inbox or spam folder.');
+            })
+            .catch((error) => {
+                alert(getFriendlyFirebaseError(error));
+            });
+    });
 });
