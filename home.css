@@ -1,0 +1,203 @@
+/* General Body Styling */
+body {
+  font-family:  "Jersey 15";
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7f7; /* Very light grey background */
+  display: flex;
+  justify-content: center; /* Center the container horizontally */
+  align-items: center; /* Center the container vertically */
+  min-height: 100vh; /* Ensure the body takes up at least the full viewport height */
+  height: 100%; /* Ensure the body height is 100% of the viewport */
+  transition: background-color 0.3s ease; /* Smooth transition for background color changes */
+}
+
+/* Container Styling */
+.container {
+  width: 100%; /* Make the container take full width */
+  max-width: 1200px; /* Optional: limit container width on large screens */
+  height: 100vh; /* Set container height to the full viewport height */
+  background-color: #fff;
+  border-radius: 8px; /* Slight round corners for a soft look */
+  overflow: auto; /* Enable scrolling if content overflows */
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for the container */
+  transition: box-shadow 0.3s ease; /* Smooth shadow effect on hover */
+}
+
+.container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* More intense shadow on hover */
+}
+
+/* Header Styling */
+header {
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+header h1 {
+  margin: 0;
+  color: #ff7b00; /* Orange logo color */
+  font-size: 1.5em;
+  text-transform: uppercase; /* Make the logo text more bold */
+  letter-spacing: 1px;
+}
+
+/* Header Button Styling */
+.header-actions {
+  margin-left: auto;
+}
+
+.header-actions button {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  padding: 8px 15px;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family:  "Jersey 15";
+  font-size: 0.9em;
+  transition: transform 0.3s ease; /* Smooth button hover effect */
+}
+
+.header-actions button:first-child {
+  background-color: #ff7b00; /* Orange login button */
+  color: white;
+  border: none;
+}
+
+.header-actions button:hover {
+  background-color: #eee;
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.header-actions button:first-child:hover {
+  background-color: #e56d00;
+}
+
+/* Main Section Layout */
+.main-section {
+  display: flex;
+  align-items: flex-start;
+  padding-bottom: 20px;
+  flex-grow: 1; /* Allow main-section to take up remaining vertical space */
+  gap: 30px; /* Add gap between left and right content */
+}
+
+.left-content {
+  flex: 2;
+  width: 100%;
+  height: auto;
+}
+
+.left-content a {
+  flex: 2;
+  width: 100%;
+  height: auto;
+  
+}
+
+
+.text-box {
+  border: 5px solid black;
+  padding: 15px;
+  margin-bottom: 20px;
+  word-wrap: break-word;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  max-width: 700px;
+  background-color: #fff;
+  margin: 0 auto;
+  transition: background-color 0.3s ease, border-left-color 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.text-box:hover {
+  border-color: #ff7b00;
+  background-color: #fafafa; /* Light gray background on hover */
+}
+
+.left-content h2 {
+  color: #333;
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.left-content p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* Get Started Button */
+.get-started-button {
+  background-color: #ff7b00;
+  color: rgb(255, 255, 255);
+  padding: 10px 20px;
+  margin-top: 100px;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.get-started-button:hover {
+  background-color: #e56d00;
+  transform: scale(1.05); /* Slight enlarge on hover */
+}
+
+/* Right Content (Image Section) */
+.right-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  border: 1px solid #ff8800;
+  border-radius: 8px;
+  border-width: 5px;
+  padding: 5px;
+}
+
+.right-content img {
+  width: 500px;
+  height: 500px;
+  display: block;
+  border-radius: 6px;
+  border: 1px solid #eee;
+  transition: transform 0.3s ease; /* Smooth transition for image hover effect */
+}
+
+.right-content img:hover {
+  transform: scale(1.05); /* Slight enlarge on hover */
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .main-section {
+    flex-direction: column;
+  }
+
+  .right-content img {
+    width: 100%;
+    height: auto;
+  }
+
+  .get-started-button {
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .left-content {
+    padding-right: 0;
+  }
+}

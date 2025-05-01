@@ -1,0 +1,234 @@
+:root {
+    --white: #ffffff;
+    --orange: #ff7f11;
+    --hover-blue: #007bff;
+    --gray: #4a4a4a;
+    --bg: #fff;
+    --red: #ff0000;
+    --header-bg: #e0e0e0;
+  }
+  .sidebar-button {
+    position: absolute;
+    top: 30px;
+    right: 90px;
+    padding: 10px 15px;
+    background-color: #ff7f11;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    z-index: 1000; /* Ensure it's above other elements */
+}
+
+.sidebar-button:hover {
+    background-color: #007bff;
+}
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: var(--bg);
+    color: var(--gray);
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 5%;
+    border-top: 4px solid var(--gray);
+    border-bottom: 1px solid #eeeeee5b;
+    background-color: var(--header-bg);
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    color: var(--orange);
+    font-weight: 700;
+  }
+  
+  .hero {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem 5%;
+  }
+  
+  .hero-text {
+    text-align: center;
+    max-width: 600px;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--orange);
+  }
+  
+  .hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #444;
+  }
+  
+  .upload-area {
+    border: 2px dashed var(--gray);
+    padding: 40px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    background: rgba(247, 247, 247, 0.9);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+  }
+  
+  .upload-area.dragover {
+    background-color: #e0e0e0;
+    border-color: #555;
+  }
+  
+  .upload-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--orange);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: var(--hover-blue);
+  }
+  
+  button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #1e7e34;
+  }
+  
+  #fileName {
+    margin-top: 10px;
+    font-style: italic;
+    color: #555;
+  }
+  .shape-corner-top-left {
+    position: absolute;
+    top: 50px;
+    left: -100px;
+    width: 180px;
+    height: 180px;
+    background-color: var(--orange);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    z-index: -1;
+  }
+  
+  .shape-corner-top-right {
+    position: absolute;
+    top: -60px;
+    right: 0px;
+    width: 250px;
+    height: 550px;
+    background-color: var(--orange);
+    clip-path: polygon(0 0, 100% 50%, 100% 100%);
+    z-index: -1;
+  }
+  
+  .shape-corner-bottom-left {
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 250px;
+    height: 250px;
+    background-color: var(--orange);
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    z-index: -1;
+  }
+  
+  .shape-corner-bottom-right {
+    position: absolute;
+    bottom: -40px;
+    right: 100px;
+    width: 220px;
+    height: 220px;
+    background-color: var(--orange);
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    border-radius: 40px;
+    z-index: -1;
+  }
+  
+  .shape-corner-blob {
+    position: absolute;
+    bottom: 100px;
+    left: 45%;
+    width: 120px;
+    height: 120px;
+    background-color: #e7e2d9;
+    clip-path: polygon(45% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+    z-index: -1;
+  }
+  .shape-corner-blob1 {
+    position: absolute;
+    top: 180px;
+    left: 180px;
+    width: 120px;
+    height: 120px;
+    background-color: #e7e2d9;
+    clip-path: polygon(45% 0%, 100% 20%, 100% 80%, 50% 100%, 0% 80%, 0% 20%);
+    z-index: -1;
+  }
+  
+  
+
+
+  
+  #message {
+    margin-top: 20px;
+    font-weight: bold;
+    color: var(--orange);
+    text-shadow: 1px 1px 1px #00000022;
+  }
+  
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.9rem;
+    color: #888;
+  }
+  

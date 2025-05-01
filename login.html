@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Log In</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase App (core SDK) -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+<script>
+  // Replace with your own Firebase config
+  const firebaseConfig = {
+  apiKey: "AIzaSyCLKBbI_X8Wbf8J0vWAKM5NFIh54ExcZW0",
+  authDomain: "cbse-converter-backend.firebaseapp.com",
+  projectId: "cbse-converter-backend",
+  storageBucket: "cbse-converter-backend.firebasestorage.app",
+  messagingSenderId: "805556286663",
+  appId: "1:805556286663:web:5d50da6a9558b2d6087ae2",
+  measurementId: "G-LPTTZ0761N"
+};
+
+
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+</head>
+<body id="deviceType">
+    <div class="container">
+        <div class="tab-buttons">
+            <button type="button" class="tab active" id="loginTab">Login</button>
+            <button type="button" class="tab" id="signupTab">Sign Up</button>
+        </div>
+        <div class="form-wrapper sign-up">
+            <form id="signupForm">
+                <h2>Sign Up</h2>
+                <div class="form-group">
+                    <label for="signupEmail">Email Address:</label>
+                    <input type="email" id="signupEmail" name="signupEmail" required>
+                </div>
+                <button type="button" id="requestOtpBtn">Request OTP</button>
+
+                <div id="otpSection" style="display: none;">
+                    <div class="form-group">
+                        <label for="signupOtp">OTP:</label>
+                        <input type="text" id="signupOtp" name="signupOtp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password:</label>
+                        <input type="password" id="signupPassword" name="signupPassword" required>
+                    </div>
+                    <button type="button" id="verifyOtpBtn">Create Account</button>
+                </div>
+
+                <p>Already have an account? <a href="#" id="loginLink">Log in</a></p>
+            </form>
+        </div>
+
+        <div class="form-wrapper sign-in">
+            <form id="loginForm">
+                <h2>Log In</h2>
+                <div class="form-group">
+                    <label for="loginEmail">Email Address:</label>
+                    <input type="email" id="loginEmail" name="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                </div>
+                <button type="button" id="loginBtn">Log In</button>
+                <p>Don't have an account? <a href="#" id="signupLink">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

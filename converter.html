@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>CBSE Results to Excel Converter</title>
+    <link rel="stylesheet" href="converter.css" />
+</head>
+<body>
+    <header>
+        <div class="logo">CBSE Txt2Excel</div>
+    </header>
+
+    <button class="sidebar-button" onclick="window.location.href='dashboard.html'">Go to home page</button>
+
+    <section class="hero flexible-layout">
+        <div class="hero-text">
+            <h1>Convert CBSE Results</h1>
+            <p>Upload your .txt file and get Excel in seconds!</p>
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📁</div>
+                <p>Drag & Drop your file here</p>
+                <p>or</p>
+                <input type="file" id="fileInput" accept=".txt" hidden />
+                <label for="fileInput" class="custom-file-upload">Select File</label>
+                <p id="fileName">No file chosen</p>
+            </div>
+
+            <button onclick="uploadFile()">Convert to Excel File</button>
+            <div id="message"></div>
+            <div class="loader" id="loadingWheel" style="display: none;"></div>
+        </div>
+    </section>
+
+    <footer>© 2025 CBSE Txt2Excel Converter</footer>
+    <script src="converter.js"></script>
+    <div class="shape-corner-top-left"></div>
+    <div class="shape-corner-top-right"></div>
+    <div class="shape-corner-bottom-left"></div>
+    <div class="shape-corner-bottom-right"></div>
+    <div class="shape-corner-blob"></div>
+    <div class="shape-corner-blob1"></div>
+</body>
+</html>

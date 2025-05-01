@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-inter">
+    <div class="flex h-screen">
+        <aside id="sidebar" class="bg-white shadow-lg">
+            <div class="flex flex-col h-full">
+                <div class="flex items-center justify-between h-16 px-4">
+                    <img src="LOGO.png" width="80" height="80">
+                     <div class="user-profile">
+                         <div class="user-avatar" id="user-avatar">
+                             </div>
+                         <div class="user-dropdown">
+                             <p class="user-email" id="user-email"></p>
+                             <div class="user-dropdown-item" onclick="logout()">Logout</div>
+                         </div>
+                     </div>
+                </div>
+                <nav id="sidebar-content" class="flex-1 p-4">
+                    <ul class="space-y-2">
+                        <li class="home-section">
+                            <a href="#" class="flex items-center text-gray-700 hover:text-[#ff7b29] rounded-md p-2" onclick="refreshPage()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home mr-2"><path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 9 12 6 15 9"/></svg>
+                                Home
+                            </a>
+                        </li>
+                        <li id="converters-menu" class="flex items-center text-gray-700 hover:text-[#ff7b29] rounded-md p-2" onclick="toggleConverters()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu mr-2"><rect width="6" height="6" x="4" y="4" rx="1"/><rect width="6" height="6" x="14" y="4" rx="1"/><rect width="6" height="6" x="4" y="14" rx="1"/><rect width="6" height="6" x="14" y="14" rx="1"/></svg>
+                            Converters
+                            <svg id="expand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto transition-transform" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>
+                        </li>
+                        <li class="converter-options hidden">
+                            <ul>
+                                <li><a href="converter.html">TXT to Excel</a></li>
+                                <li><a href="#txt-to-pdf">TXT to PDF (Coming Soon)</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <div class="text-gray-700 hover:text-[#ff7b29] rounded-md p-2 cursor-pointer" onclick="toggleSettings()">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings mr-2"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/><path d="M12 10v2"/><path d="M12 14v2"/><path d="M12 8v.01"/><path d="M12 16v.01"/><path d="M8 12a4 4 0 1 0 8 0 4 4 0 0 0-8 0z"/></svg>
+                                        Settings
+                                    </div>
+                                    <svg id="settings-expand-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down ml-auto transition-transform" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="settings-options hidden p-4">
+                            <div class="flex items-center justify-between">
+                                <label for="brightnessSlider" class="mr-2 text-sm font-medium text-gray-900">Brightness:</label>
+                                <input type="range" id="brightnessSlider" min="50" max="200" value="100" class="cursor-pointer">
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="mt-auto p-4">
+                    <button id="toggle-sidebar" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-md transition duration-300 w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-fold"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 10 12 15 7 10"/><polyline points="7 4 12 9 17 4"/></svg>
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-6">
+            <div class="bg-white rounded-lg shadow-md p-8 mb-6">
+                <h1 class="text-2xl font-semibold text-gray-800 mb-4" id="greeting"></h1>
+                <p class="text-gray-600">Discover insights, connect with investors, and grow your ideas using our powerful and intuitive tools. .</p>
+            </div>
+            <div class="bg-white rounded-lg shadow-md p-8 mt-8" id="converters-section">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Converters</h2>
+                <div class="flex space-x-4">
+                    <div class="converter-box">
+                        <button onclick="window.location.href='converter.html'" class="bg-[#ff7b29] hover:bg-[#e06a24] text-white font-semibold py-2 px-4 rounded-md transition duration-300">
+                            TXT to Excel
+                        </button>
+                        <p class="text-gray-600 mt-2">Convert your TXT files to Excel spreadsheets for better data organization and analysis.</p>
+                    </div>
+                    <div class="converter-box">
+                        <button onclick="alert('TXT to PDF functionality (Coming Soon)')" class="bg-gray-300 text-gray-600 font-semibold py-2 px-4 rounded-md cursor-not-allowed">
+                            TXT to PDF (Coming Soon)
+                        </button>
+                        <p class="text-gray-600 mt-2">Convert your TXT files to PDF documents for easy sharing and printing. (Coming Soon)</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContent = document.getElementById('sidebar-content');
+        const toggleSidebarButton = document.getElementById('toggle-sidebar');
+        const convertersMenu = document.getElementById('converters-menu');
+        const converterOptions = document.querySelector('.converter-options');
+        const expandIcon = document.getElementById('expand-icon');
+        const userEmailElement = document.getElementById('user-email');
+        const userAvatarElement = document.getElementById('user-avatar');
+        const greetingElement = document.getElementById('greeting');
+        const brightnessSlider = document.getElementById('brightnessSlider');
+        const bodyElement = document.querySelector('body');
+        const settingsOptions = document.querySelector('.settings-options');
+        const settingsExpandIcon = document.getElementById('settings-expand-icon');
+        const homeSection = document.querySelector('.home-section a'); // Select the anchor tag inside the home section
+
+        let isSidebarExpanded = false;
+        let isConvertersExpanded = false;
+        let isSettingsExpanded = false;
+
+        toggleSidebarButton.addEventListener('click', () => {
+            isSidebarExpanded = !isSidebarExpanded;
+            sidebar.classList.toggle('expanded', isSidebarExpanded);
+            sidebarContent.classList.toggle('expanded', isSidebarExpanded);
+             if (isSidebarExpanded) {
+                 toggleSidebarButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-unfold"><path d="M3 9v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9"/><polyline points="16 17 12 13 8 17"/><polyline points="16 7 12 11 8 7"/></svg>`; // Change to unfold icon
+             } else {
+                 toggleSidebarButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu-fold"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 10 12 15 7 10"/><polyline points="7 4 12 9 17 4"/></svg>`;
+             }
+        });
+
+
+        function toggleConverters() {
+            isConvertersExpanded = !isConvertersExpanded;
+            converterOptions.classList.toggle('hidden', !isConvertersExpanded);
+            expandIcon.classList.toggle('rotate-180', isConvertersExpanded);
+        }
+
+        function toggleSettings() {
+            isSettingsExpanded = !isSettingsExpanded;
+            settingsOptions.classList.toggle('hidden', !isSettingsExpanded);
+            settingsExpandIcon.classList.toggle('rotate-180', isSettingsExpanded);
+        }
+
+        function logout() {
+            //  Replace this with your actual logout logic (e.g., redirect to login page)
+            alert('Logging out...');
+            localStorage.removeItem('userEmail'); // Remove email on logout
+            window.location.href = 'home.html'; //  Replace 'home.html' with your actual login page URL
+        }
+
+        // Function to refresh the page
+        function refreshPage() {
+            window.location.reload();
+        }
+
+        // Attach the refreshPage function to the onclick event of the home button
+        // Make sure the correct element is selected.
+        const homeButton = document.querySelector('.home-section a');
+        if (homeButton) {
+            homeButton.onclick = refreshPage;
+        }
+
+        // Function to get the first letter of the email
+        function getFirstLetter(email) {
+            if (email && email.length > 0) {
+                return email[0].toUpperCase();
+            }
+            return '';
+        }
+
+        // Set the user's email and avatar letter on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const storedEmail = localStorage.getItem('userEmail');
+            if (storedEmail) {
+                userEmailElement.textContent = storedEmail;
+                userAvatarElement.textContent = getFirstLetter(storedEmail);
+            } else {
+                // Handle case where userEmail is not in local storage (e.g., not logged in)
+                userEmailElement.textContent = 'Guest';
+                userAvatarElement.textContent = 'G'; // Or some default
+            }
+
+            // Function to get the greeting based on the time of day
+            function getGreeting() {
+                const currentTime = new Date();
+                const hours = currentTime.getHours();
+
+                let greeting = "";
+                if (hours >= 5 && hours < 12) {
+                    greeting = "Good Morning!";
+                } else if (hours >= 12 && hours < 17) {
+                    greeting = "Good Afternoon!";
+                } else {
+                    greeting = "Good Evening!";
+                }
+                return greeting;
+            }
+
+            // Set the greeting and apply the orange color
+            const greetingText = getGreeting();
+            greetingElement.textContent = greetingText;
+            greetingElement.style.color = "#ff7b29"; // Set the color to orange
+        });
+
+        // Brightness adjustment functionality
+        brightnessSlider.addEventListener('input', function() {
+            const brightnessValue = this.value / 100; // Normalize to a value between 0.5 and 2
+            bodyElement.style.filter = `brightness(${brightnessValue})`;
+        });
+    </script>
+</body>
+</html>

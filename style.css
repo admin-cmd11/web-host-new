@@ -1,0 +1,145 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4; /* A light grey background */
+    margin: 0;
+}
+
+.container {
+    background-color: #fff; /* White container */
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    max-width: 350px; /* Adjust width as needed */
+    width: 90%;
+    display: flex;
+    flex-direction: column; /* Stack tabs and forms vertically */
+    align-items: stretch; /* Make children take full width */
+}
+
+.tab-buttons {
+    display: flex;
+    background-color: #f9f9f9; /* Light grey for the tab background */
+    border-bottom: 1px solid #ddd;
+}
+
+.tab {
+    background: none;
+    border: none;
+    color: #333; /* Dark grey text */
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    flex-grow: 1;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.tab.active {
+    background-color: #ff7b29; /* Orange for the active tab */
+    color: #fff; /* White text for active tab */
+}
+
+.tab:hover {
+    background-color: #ffe0b2; /* Light orange on hover */
+}
+
+.form-wrapper {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: transform 0.6s ease-in-out;
+}
+
+.sign-up {
+    transform: translateX(100%); /* Initially slide it to the right */
+}
+
+.sign-in {
+    transform: translateX(0%); /* Initially show the sign-in form */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555; /* Medium grey label text */
+    font-size: 14px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+}
+
+button {
+    background-color: #ff7b29; /* Orange button */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Make buttons full width */
+}
+
+button:hover {
+    background-color: #e67e00; /* Darker orange on hover */
+}
+
+p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+a {
+    color: #ff8c00; /* Orange link */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* JavaScript will toggle these classes */
+.slide-left .sign-up {
+    transform: translateX(0%);
+}
+
+.slide-left .sign-in {
+    transform: translateX(-100%);
+}
+
+.slide-right .sign-up {
+    transform: translateX(100%);
+}
+
+.slide-right .sign-in {
+    transform: translateX(0%);
+}
+
+/* Hide the non-active form initially */
+.container:not(.slide-left) .sign-up {
+    display: none;
+}
+
+.container.slide-left .sign-in {
+    display: none;
+}
